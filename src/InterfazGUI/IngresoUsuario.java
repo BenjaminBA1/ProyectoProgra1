@@ -57,6 +57,8 @@ public class IngresoUsuario extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jrbOtroCaso = new javax.swing.JRadioButton();
+        btnVerClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -131,6 +133,11 @@ public class IngresoUsuario extends javax.swing.JDialog {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
 
+        TipoTramite.add(jrbOtroCaso);
+        jrbOtroCaso.setText("Otro caso");
+
+        btnVerClientes.setText("Ver Clientes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,7 +172,9 @@ public class IngresoUsuario extends javax.swing.JDialog {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCancelar)
-                                .addGap(280, 280, 280)
+                                .addGap(115, 115, 115)
+                                .addComponent(btnVerClientes)
+                                .addGap(90, 90, 90)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnGuardar)))
@@ -218,6 +227,10 @@ public class IngresoUsuario extends javax.swing.JDialog {
                                 .addComponent(lblTituloTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblTituloDiscapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(54, 54, 54))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jrbOtroCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +298,9 @@ public class IngresoUsuario extends javax.swing.JDialog {
                             .addComponent(jrbMultiplesTramites)
                             .addComponent(jrbPlataforma)))
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jrbOtroCaso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -296,7 +311,9 @@ public class IngresoUsuario extends javax.swing.JDialog {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCancelar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelar)
+                            .addComponent(btnVerClientes))
                         .addGap(34, 34, 34))))
         );
 
@@ -328,6 +345,7 @@ public class IngresoUsuario extends javax.swing.JDialog {
     private javax.swing.ButtonGroup TipoTramite;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnVerClientes;
     private javax.swing.JComboBox<String> cbxBebe;
     private javax.swing.JComboBox<String> cbxDiscapacidad;
     private javax.swing.JLabel generoCliente;
@@ -346,6 +364,7 @@ public class IngresoUsuario extends javax.swing.JDialog {
     private javax.swing.JRadioButton jrbHombre;
     private javax.swing.JRadioButton jrbMujer;
     private javax.swing.JRadioButton jrbMultiplesTramites;
+    private javax.swing.JRadioButton jrbOtroCaso;
     private javax.swing.JRadioButton jrbPlataforma;
     private javax.swing.JLabel lblTituloBebe;
     private javax.swing.JLabel lblTituloDiscapacidad;

@@ -90,7 +90,9 @@
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="btnVerClientes" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
@@ -164,6 +166,11 @@
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jrbOtroCaso" min="-2" pref="98" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -256,7 +263,9 @@
                       </Group>
                       <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jrbOtroCaso" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -270,7 +279,10 @@
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnVerClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -483,6 +495,19 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/imagenes/guardar.png"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jrbOtroCaso">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="TipoTramite"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Otro caso"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnVerClientes">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ver Clientes"/>
           </Properties>
         </Component>
       </SubComponents>
