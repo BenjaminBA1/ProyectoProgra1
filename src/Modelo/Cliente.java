@@ -53,4 +53,125 @@ public class Cliente {
         //int secuencia = Banco.getInstancia().getSiguienteSecuencia(categoria);
         //this.codigo = categoria + String.valueOf(secuencia);
     }
+    /**
+     * metodo que es privado que define la prioridad del cliente
+     * @return letra de la categoría de la (A a la G)
+     */
+    
+    private char asignarCategoria() {
+        // si tiene discapacidad Y bebe, sera de prioridad maxima
+        if (discapacidad && bebe) {
+            return 'A';
+        }
+
+        if (edad >= 65) {
+            return 'A'; //  es adulto mayor
+        } else if (bebe && genero == 'F') {
+            return 'B'; // es una mujer con un bebe
+        } else if (discapacidad) {
+            return 'C'; // persona con alguna discapacidad
+        } else if (tramite == 'D') {
+            return 'D'; // realizara multiples tramites
+        } else if (tramite == 'E') {
+            return 'E'; // solo ira a plataforma
+        } else {
+            return (genero == 'F') ? 'F' : 'G'; // para otros casos
+        }
+    }
+    
+     /**
+     * metodo publico para poder recalcular la categoria y el codigo
+     * si los datos cambian se usara al editar cliente
+     */
+    public void recalcularCategoria() {
+        this.categoria = asignarCategoria();
+        //int secuencia = Banco.getInstancia().getSiguienteSecuencia(categoria);
+        //this.codigo = categoria + String.valueOf(secuencia);
+    }
+    // ==================== GETTERS ==================== METODOS DE ACCESO
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public char getGenero() {
+        return genero;
+    }
+
+    public boolean tieneDiscapacidad() {
+        return discapacidad;
+    }
+
+    public boolean tieneBebe() {
+        return bebe;
+    }
+
+    public char getTramite() {
+        return tramite;
+    }
+
+    public int getTolerancia() {
+        return tolerancia;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public boolean isOtroCaso() {
+        return otroCaso;
+    }
+
+    public long getTiempoIngreso() {
+        return tiempoIngreso;
+    }
+
+    public char getCategoria() {
+        return categoria;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    // ==================== SETTERS ==================== METODOS QUE MODIFICAN
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setGenero(char genero) {
+        this.genero = genero;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
+    }
+
+    public void setBebe(boolean bebe) {
+        this.bebe = bebe;
+    }
+
+    public void setTramite(char tramite) {
+        this.tramite = tramite;
+    }
+
+    public void setTolerancia(int tolerancia) {
+        this.tolerancia = tolerancia;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setOtroCaso(boolean otroCaso) {
+        this.otroCaso = otroCaso;
+    }
+
+    // ==================== OTROS ====================
+
+    @Override
+    public String toString() {
+        return codigo + " - " + nombre;
+    }
 }
