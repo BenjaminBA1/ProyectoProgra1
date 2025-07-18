@@ -131,6 +131,11 @@ public class IngresoUsuario extends javax.swing.JDialog {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -184,6 +189,11 @@ public class IngresoUsuario extends javax.swing.JDialog {
         jrbOtroCaso.setText("Otro caso");
 
         btnVerClientes.setText("Ver Clientes");
+        btnVerClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -449,6 +459,16 @@ public class IngresoUsuario extends javax.swing.JDialog {
 
       
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();// cierra la ventana
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVerClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClientesActionPerformed
+        CrudCliente crudCliente = new CrudCliente(); // llama a la tabla 
+        crudCliente.setVisible(true); // Mostrar la ventana
+        dispose(); // Cerrar la ventana actual (IngresoUsuario)
+    }//GEN-LAST:event_btnVerClientesActionPerformed
 
     /**
      * @param args the command line arguments
