@@ -2,21 +2,68 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
+//aca es la ubicacion de la clase 
 package InterfazGUI;
+//se importan las librerias y clases que necesita el sistema para funcionar 
+import Modelo.Cliente;
 
 /**
  *
  * @author benal
  */
 public class IngresoUsuario extends javax.swing.JDialog {
-
+// se encarga de verificar si se esta creando un usuario nuevo o solo se esta editando
+    private Cliente clienteEditar = null; //no carga datos del cliente 
+    private boolean esEdicion = false;//  carga datos del cliente 
+    private int indiceEdicion = -1;
     /**
-     * Creates new form IngresoDatosUsuario
+     * Creates new form IngresoUsuario
+     * @param parent
+     * @param modal
      */
     public IngresoUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null); // Centrar ventana
+
+        // Quitar selección de los grupos de radio buttons
+        GeneroCliente.clearSelection();
+        TipoTramite.clearSelection();
+
+        // Colocar los ComboBox en la primera opción ("Seleccione...")
+        cbxDiscapacidad.setSelectedIndex(0);
+        cbxBebe.setSelectedIndex(0);
+        
     }
+    
+    public IngresoUsuario(java.awt.Frame parent, boolean modal, Cliente cliente, int indice) {
+        super(parent, modal);
+        setLocationRelativeTo(null); // Centrar ventana
+
+        //Cargar valores para modo edición
+        this.clienteEditar = cliente;
+        this.esEdicion = true;
+        this.indiceEdicion = indice;
+
+        //Precargar datos en campos de entrada
+        txtNombre.setText(cliente.getNombre());
+        txtEdad.setText(String.valueOf(cliente.getEdad()));
+
+        jrbHombre.setSelected(cliente.getGenero() == 'M');
+        jrbMujer.setSelected(cliente.getGenero() == 'F');
+
+        cbxDiscapacidad.setSelectedItem(cliente.tieneDiscapacidad() ? "Sí" : "No");
+        cbxBebe.setSelectedItem(cliente.tieneBebe() ? "Sí" : "No");
+
+        //Seleccionar tipo de trámite
+        if (cliente.getTramite() == 'D') {
+            jrbMultiplesTramites.setSelected(true);
+        } else if (cliente.getTramite() == 'E') {
+            jrbPlataforma.setSelected(true);
+        } else {
+            jrbOtroCaso.setSelected(true);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
