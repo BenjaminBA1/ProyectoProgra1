@@ -5,7 +5,8 @@
 package InterfazGUI;
 
 /**
- *
+ *Esta clase lo que va a hacer es Iniciar el proceso del sistema 
+ * es decir crear y registrar un sistema 
  * @author benal
  */
 public class LoginPrincipal extends javax.swing.JFrame {
@@ -15,6 +16,7 @@ public class LoginPrincipal extends javax.swing.JFrame {
      */
     public LoginPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);// centra la ventana
     }
 
     /**
@@ -41,8 +43,18 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
         btnInicio.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnInicio.setText("Iniciar");
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenido al Banco UTN");
@@ -118,6 +130,17 @@ public class LoginPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        // aca se va a instanciar la clase Ingreso de Usuario
+        IngresoUsuario ingreso = new IngresoUsuario(null, true); // 'null' ya que es modal
+        ingreso.setVisible(true);// muestra la ventana
+        
+    }//GEN-LAST:event_btnInicioActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+         System.exit(0);//cierra el programa
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
