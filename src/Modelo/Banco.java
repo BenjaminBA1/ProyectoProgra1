@@ -39,7 +39,7 @@ public class Banco {
             secuencias.put(letra, 0);
         }
 
-        // ✅ Crear 5 cajeros regulares
+        //  Crear 5 cajeros regulares
         for (int i = 0; i < 5; i++) {
             //cajeros.add(new Cajero(i + 1));
         }
@@ -114,5 +114,85 @@ public class Banco {
         }
     }
     
-    //
+    // codigo para el cliente pero no se usa directamente porque el codigo se asigna desde la clase cliente
+    public String generarCodigoConPrioridad(Cliente cliente) {
+        char categoria = cliente.getCategoria();
+        int secuencia = secuencias.get(categoria) + 1;
+        secuencias.put(categoria, secuencia);
+        return String.format("%c%d", categoria, secuencia);
+    }
+
+    // aqui se hace un reporte completo del banco
+    /*public String generarReporteTexto() {
+        StringBuilder sb = new StringBuilder();
+        int totalAtendidos = 0;
+        int totalClientes = fila.size();
+        Map<Character, Integer> porCategoria = new HashMap<>();
+
+        sb.append("=== Reporte por Cajero ===\n");
+
+        for (Cajero cajero : cajeros) {
+            int atendidos = cajero.getCantidadAtendidos();
+            long tiempo = cajero.getTiempoTotalAtencion();
+            double promedio = atendidos > 0 ? (double) tiempo / atendidos : 0;
+
+            totalAtendidos += atendidos;
+
+            sb.append("Cajero ").append(cajero.getId())
+              .append(" - Atendidos: ").append(atendidos)
+              .append(", Promedio: ").append(String.format("%.2f", promedio))
+              .append(" min\n");
+
+            // cuenta por la categoria
+            for (Cliente c : cajero.getClientesAtendidos()) {
+                char letra = c.getCategoria();
+                porCategoria.put(letra, porCategoria.getOrDefault(letra, 0) + 1);
+            }
+        }
+
+        sb.append("\n=== Totales Generales ===\n");
+        sb.append("Total ingresados al banco: ").append(totalClientes + totalAtendidos + noAtendidos.size()).append("\n");
+        sb.append("Total atendidos: ").append(totalAtendidos).append("\n");
+        sb.append("En espera: ").append(fila.size()).append("\n");
+        sb.append("Se fueron sin ser atendidos: ").append(noAtendidos.size()).append("\n");
+
+        sb.append("\n=== Atendidos por Categoría ===\n");
+        for (Map.Entry<Character, Integer> e : porCategoria.entrySet()) {
+            sb.append("Categoría ").append(e.getKey()).append(": ").append(e.getValue()).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    // aqui se hace un reporte especifico de los clientes que no fueron atendidos 
+    public String generarReporteNoAtendidos() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== Clientes que se fueron sin ser atendidos ===\n");
+
+        if (noAtendidos.isEmpty()) {
+            sb.append("No hay clientes que se hayan ido.\n");
+        } else {
+            for (Cliente c : noAtendidos) {
+                sb.append("- ").append(c.getCodigo())
+                  .append(", tolerancia: ").append(c.getTolerancia())
+                  .append(" minutos\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // restablece el sistema y vuelve a iniciar
+    public void reset() {
+        fila.clear();
+        noAtendidos.clear();
+
+        for (Cajero c : cajeros) {
+            c.getClientesAtendidos().clear();
+        }
+
+        for (char letra : secuencias.keySet()) {
+            secuencias.put(letra, 0);
+        }
+    }*/
 }
