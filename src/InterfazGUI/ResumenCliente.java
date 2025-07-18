@@ -68,9 +68,19 @@ public class ResumenCliente extends javax.swing.JFrame {
 
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReporte.setText("Visualizar Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
 
         btnClienteNoAten.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnClienteNoAten.setText("Clientes NO atendidos");
+        btnClienteNoAten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteNoAtenActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
 
@@ -79,10 +89,25 @@ public class ResumenCliente extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar.png"))); // NOI18N
 
         btnRegistrarCliente.setText("Registrar otro cliente ");
+        btnRegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarClienteActionPerformed(evt);
+            }
+        });
 
         btnEditarUsuario.setText("Editar Usuario");
+        btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,6 +205,39 @@ public class ResumenCliente extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Su simulacion esta siendo procesada, se atenderan cada 5 personas\nGracias por su paciencia", 
                               "Estimado Usuario", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSimularAtencionActionPerformed
+
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // las acciones que va a hacer cuando se presione el boton de visualizar Reporte
+         // Crea un nuevo frame con el reporte general del banco
+        //ReporteFrame reporte = new ReporteFrame(Banco.getInstancia().generarReporteTexto());
+       // reporte.setVisible(true); // Muestra el frame
+    }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void btnClienteNoAtenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteNoAtenActionPerformed
+          // Crea un nuevo frame con los clientes que se fueron sin ser atendidos
+        //ReporteFrame noAtendidos = new ReporteFrame(Banco.getInstancia().generarReporteNoAtendidos());
+        //noAtendidos.setVisible(true);
+    }//GEN-LAST:event_btnClienteNoAtenActionPerformed
+
+    private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
+        this.dispose(); // Cierra la ventana actual
+        // Abre nuevamente el formulario de ingreso de cliente
+        IngresoUsuario ingreso = new IngresoUsuario(this, true);
+        ingreso.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarClienteActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
+        // Abre el CRUD completo (interfaz donde se pueden ver y editar todos los clientes)
+        CrudCliente crudCliente = new CrudCliente();
+        crudCliente.setVisible(true);
+
+        // Cierra esta ventana actual (ResumenCliente)
+        dispose();
+    }//GEN-LAST:event_btnEditarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,12 @@
  */
 package InterfazGUI;
 
+import Modelo.Banco;
+import Modelo.Cliente;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author benal
@@ -15,7 +21,70 @@ public class CrudCliente extends javax.swing.JFrame {
      */
     public CrudCliente() {
         initComponents();
+        setLocationRelativeTo(null);// Centra la ventana 
+        actualizarTabla();
+        txtFiltro.getDocument().addDocumentListener(new DocumentListener() {
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        filtrarTabla();
     }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        filtrarTabla();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        filtrarTabla();
+    }
+    
+        }
+    );
+    }
+        
+  private void actualizarTabla() {
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    modelo.setRowCount(0); // Limpiar tabla
+
+    for (Cliente c : Banco.getInstancia().getClientes()) {
+        modelo.addRow(new Object[]{
+            c.getCodigo(),
+            c.getNombre(),              
+            c.getGenero(),
+            c.getEdad(),
+            c.tieneDiscapacidad() ? "Sí" : "No",
+            c.tieneBebe() ? "Sí" : "No",
+            c.getTramite(),
+            c.getCategoria()
+        });
+    }
+}
+    
+    private void filtrarTabla() {
+    String texto = txtFiltro.getText().trim().toLowerCase();
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    modelo.setRowCount(0); // limpiar tabla
+
+    for (Cliente c : Banco.getInstancia().getClientes()) {
+        String nombre = c.getNombre().toLowerCase();
+        String categoria = String.valueOf(c.getCategoria()).toLowerCase();
+
+        if (texto.isEmpty() || nombre.contains(texto) || categoria.equals(texto)) {
+            modelo.addRow(new Object[]{
+                c.getCodigo(),
+                c.getNombre(),
+                c.getGenero(),
+                c.getEdad(),
+                c.tieneDiscapacidad() ? "Sí" : "No",
+                c.tieneBebe() ? "Sí" : "No",
+                c.getTramite(),
+                c.getCategoria()
+            });
+        }
+    }
+}
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
