@@ -31,11 +31,26 @@ public class Cajero {
         this.clientesAtendidos = new ArrayList<>();
     }
     
-    //
-    
-    
-    
-    
+    // getter del identificador del cajero
+    public int getId() {
+        return id;
+    }
+
+    // getter de la cantidad de clientes que ha atendido
+    public int getCantidadAtendidos() {
+        return cantidadAtendidos;
+    }
+
+    // getter del tiempo total de atención acumulado
+    public long getTiempoTotalAtencion() {
+        return tiempoTotalAtencion;
+    }
+
+    // devuelve la lista de clientes atendidos por este cajero
+    public ArrayList<Cliente> getClientesAtendidos() {
+        return clientesAtendidos;
+    }
+     
         /**
      * Método para que el cajero atienda a un cliente.
      * Calcula el tiempo que esperó el cliente desde su ingreso al banco
