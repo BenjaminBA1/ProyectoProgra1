@@ -379,7 +379,75 @@ public class IngresoUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
- 
+ //Obtener datos de entrada
+    String nombre = txtNombre.getText();
+    int edad = Integer.parseInt(txtEdad.getText());
+
+    char genero = jrbHombre.isSelected() ? 'M' : 'F';
+    boolean discapacidad = cbxDiscapacidad.getSelectedItem().equals("Sí");
+    boolean bebe = cbxBebe.getSelectedItem().equals("Sí");
+    boolean otroCaso = jrbOtroCaso.isSelected();
+
+    //Determinar tipo de trámite
+    char tramite;
+    if (jrbMultiplesTramites.isSelected()) {
+        tramite = 'D';
+    } else if (jrbPlataforma.isSelected()) {
+        tramite = 'E';
+    } else {
+        tramite = (genero == 'F') ? 'F' : 'G';
+    }
+
+    // Calcular tolerancia según género
+    int tolerancia = (genero == 'F') ? 8 : 6;
+
+    // Modo edición de cliente existente
+    if (esEdicion) {
+        Cliente clienteEditado = new Cliente(
+            nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso
+        );
+
+       // Banco.getInstancia().reemplazarCliente(indiceEdicion, clienteEditado);
+
+        //JOptionPane.showMessageDialog(
+          //  this, "Cliente editado con éxito. Nuevo código: " + clienteEditado.getCodigo()
+        //);
+
+        this.dispose(); // Cierra ventana
+    }
+
+    //Modo registro de cliente nuevo
+    else {
+        Cliente nuevoCliente = new Cliente(
+            nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso
+        );
+
+        //Banco.getInstancia().agregarCliente(nuevoCliente);
+
+       // JOptionPane.showMessageDialog(
+       //     this, "Cliente agregado con éxito. Código: " + nuevoCliente.getCodigo()
+       // );
+
+        //Limpiar campos para registrar otro cliente
+        txtNombre.setText("");
+        txtEdad.setText("");
+        GeneroCliente.clearSelection();
+        TipoTramite.clearSelection();
+        cbxDiscapacidad.setSelectedIndex(0);
+        cbxBebe.setSelectedIndex(0);
+
+        //Mostrar resumen
+        //ResumenCliente resumen = new ResumenCliente();
+        this.dispose();
+       // resumen.setVisible(true);
+
+        //Cerrar ventana padre si es del tipo CrudCliente
+        //Window parent = SwingUtilities.getWindowAncestor(this);
+        //if (parent != null && parent instanceof CrudCliente) {
+          //  parent.setVisible(false);
+        }
+
+      
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
