@@ -3,18 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazGUI;
-
+// Importa la lógica del banco y la utilidad de mensajes emergentes
+import Modelo.Banco;
+import javax.swing.JOptionPane;
 /**
- *
- * @author benal
+ * ventana que se muestra despues de registrar un cliente
+ * Ofrece varias acciones como:
+ * simular atencion
+ * ve reporte
+ * ve clientes no atendidos
+ * registrar a otros cliente
+ * ir al CRUD
+ * en esta ventana es el menu intermedio entre el ingreso y los reportes
  */
 public class ResumenCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ResumenCliente
-     */
+    // Constructor de la ventana
     public ResumenCliente() {
-        initComponents();
+        initComponents(); // inicializa los componentes que son visuales del formulario
+        setLocationRelativeTo(null); // centra la ventana en la pantalla
     }
 
     /**
@@ -53,6 +60,11 @@ public class ResumenCliente extends javax.swing.JFrame {
 
         btnSimularAtencion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSimularAtencion.setText("Simular Atención");
+        btnSimularAtencion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimularAtencionActionPerformed(evt);
+            }
+        });
 
         btnReporte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReporte.setText("Visualizar Reporte");
@@ -160,6 +172,14 @@ public class ResumenCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSimularAtencionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularAtencionActionPerformed
+        Banco.getInstancia().atender();// llama al metodo atender() que procesa los clientes en la fila
+        
+        // muestra un mensaje informativo al usuario
+        JOptionPane.showMessageDialog(null, "Su simulacion esta siendo procesada, se atenderan cada 5 personas\nGracias por su paciencia", 
+                              "Estimado Usuario", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnSimularAtencionActionPerformed
 
     /**
      * @param args the command line arguments
