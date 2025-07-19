@@ -5,7 +5,11 @@
 //aca es la ubicacion de la clase 
 package InterfazGUI;
 //se importan las librerias y clases que necesita el sistema para funcionar 
+import Modelo.Banco;
 import Modelo.Cliente;
+import java.awt.Window;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -127,7 +131,7 @@ public class IngresoUsuario extends javax.swing.JDialog {
         lblTituloDiscapacidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTituloDiscapacidad.setText("Tiene alguna discapacidad");
 
-        cbxDiscapacidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opccion ", "Si", "No" }));
+        cbxDiscapacidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "No", "Sí" }));
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -145,7 +149,7 @@ public class IngresoUsuario extends javax.swing.JDialog {
             }
         });
 
-        cbxBebe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opcion", "No", "Si" }));
+        cbxBebe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "No", "Sí" }));
 
         GeneroCliente.add(jrbMujer);
         jrbMujer.setText("Mujer");
@@ -265,7 +269,7 @@ public class IngresoUsuario extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(543, 543, 543)
+                        .addGap(540, 540, 540)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -417,11 +421,11 @@ public class IngresoUsuario extends javax.swing.JDialog {
             nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso
         );
 
-       // Banco.getInstancia().reemplazarCliente(indiceEdicion, clienteEditado);
+        Banco.getInstancia().reemplazarCliente(indiceEdicion, clienteEditado);
 
-        //JOptionPane.showMessageDialog(
-          //  this, "Cliente editado con éxito. Nuevo código: " + clienteEditado.getCodigo()
-        //);
+        JOptionPane.showMessageDialog(
+        this, "Cliente editado con éxito. Nuevo código: " + clienteEditado.getCodigo()
+        );
 
         this.dispose(); // Cierra ventana
     }
@@ -432,11 +436,11 @@ public class IngresoUsuario extends javax.swing.JDialog {
             nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso
         );
 
-        //Banco.getInstancia().agregarCliente(nuevoCliente);
+       Banco.getInstancia().agregarCliente(nuevoCliente);
 
-       // JOptionPane.showMessageDialog(
-       //     this, "Cliente agregado con éxito. Código: " + nuevoCliente.getCodigo()
-       // );
+       JOptionPane.showMessageDialog(
+            this, "Cliente agregado con éxito. Código: " + nuevoCliente.getCodigo()
+        );
 
         //Limpiar campos para registrar otro cliente
         txtNombre.setText("");
@@ -447,16 +451,16 @@ public class IngresoUsuario extends javax.swing.JDialog {
         cbxBebe.setSelectedIndex(0);
 
         //Mostrar resumen
-        //ResumenCliente resumen = new ResumenCliente();
+        ResumenCliente resumen = new ResumenCliente();
         this.dispose();
-       // resumen.setVisible(true);
+        resumen.setVisible(true);
 
         //Cerrar ventana padre si es del tipo CrudCliente
-        //Window parent = SwingUtilities.getWindowAncestor(this);
-        //if (parent != null && parent instanceof CrudCliente) {
-          //  parent.setVisible(false);
+        Window parent = SwingUtilities.getWindowAncestor(this);
+        if (parent != null && parent instanceof CrudCliente) {
+         parent.setVisible(false);
         }
-
+    }
       
     }//GEN-LAST:event_btnGuardarActionPerformed
 

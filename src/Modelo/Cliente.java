@@ -47,11 +47,11 @@ public class Cliente {
         this.tiempoIngreso = System.currentTimeMillis();
 
         // Determinar la categoría según condiciones
-        //this.categoria = asignarCategoria();
+        this.categoria = asignarCategoria();
 
         // Generar el código con base en la categoría
-        //int secuencia = Banco.getInstancia().getSiguienteSecuencia(categoria);
-        //this.codigo = categoria + String.valueOf(secuencia);
+        int secuencia = Banco.getInstancia().getSiguienteSecuencia(categoria);
+        this.codigo = categoria + String.valueOf(secuencia);
     }
     /**
      * metodo que es privado que define la prioridad del cliente
@@ -85,8 +85,8 @@ public class Cliente {
      */
     public void recalcularCategoria() {
         this.categoria = asignarCategoria();
-        //int secuencia = Banco.getInstancia().getSiguienteSecuencia(categoria);
-        //this.codigo = categoria + String.valueOf(secuencia);
+        int secuencia = Banco.getInstancia().getSiguienteSecuencia(categoria);
+        this.codigo = categoria + String.valueOf(secuencia);
     }
     // ==================== GETTERS ==================== METODOS DE ACCESO
 

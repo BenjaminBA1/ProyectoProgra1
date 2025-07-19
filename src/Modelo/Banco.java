@@ -41,7 +41,7 @@ public class Banco {
 
         //  Crear 5 cajeros regulares
         for (int i = 0; i < 5; i++) {
-            //cajeros.add(new Cajero(i + 1));
+            cajeros.add(new Cajero(i + 1));
         }
     }
 
@@ -109,7 +109,7 @@ public class Banco {
         for (Cajero cajero : cajeros) {
             if (!fila.isEmpty()) {
                 Cliente cliente = fila.poll();
-                //cajero.atenderCliente(cliente);
+                cajero.atenderCliente(cliente);
             }
         }
     }
@@ -123,7 +123,7 @@ public class Banco {
     }
 
     // aqui se hace un reporte completo del banco
-    /*public String generarReporteTexto() {
+    public String generarReporteTexto() {
         StringBuilder sb = new StringBuilder();
         int totalAtendidos = 0;
         int totalClientes = fila.size();
@@ -194,5 +194,5 @@ public class Banco {
         for (char letra : secuencias.keySet()) {
             secuencias.put(letra, 0);
         }
-    }*/
+    }
 }

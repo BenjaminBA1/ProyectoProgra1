@@ -209,14 +209,14 @@ public class ResumenCliente extends javax.swing.JFrame {
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // las acciones que va a hacer cuando se presione el boton de visualizar Reporte
          // Crea un nuevo frame con el reporte general del banco
-        //ReporteFrame reporte = new ReporteFrame(Banco.getInstancia().generarReporteTexto());
-       // reporte.setVisible(true); // Muestra el frame
+       ReporteFrame reporte = new ReporteFrame(Banco.getInstancia().generarReporteTexto());
+       reporte.setVisible(true); // Muestra el frame
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnClienteNoAtenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteNoAtenActionPerformed
           // Crea un nuevo frame con los clientes que se fueron sin ser atendidos
-        //ReporteFrame noAtendidos = new ReporteFrame(Banco.getInstancia().generarReporteNoAtendidos());
-        //noAtendidos.setVisible(true);
+        ReporteFrame noAtendidos = new ReporteFrame(Banco.getInstancia().generarReporteNoAtendidos());
+        noAtendidos.setVisible(true);
     }//GEN-LAST:event_btnClienteNoAtenActionPerformed
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed

@@ -15,6 +15,14 @@ public class ReporteFrame extends javax.swing.JFrame {
      */
     public ReporteFrame() {
         initComponents();
+        setLocationRelativeTo(null);//centra la ventana 
+    }
+    
+    public ReporteFrame(String texto) {
+        setLocationRelativeTo(null);//centra la ventana
+        txtReporte.setText(texto); // Mostrar texto en el área
+        txtReporte.setCaretPosition(0); // Ir al principio del texto
+        
     }
 
     /**
@@ -88,7 +96,8 @@ public class ReporteFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        this.dispose();
+        this.dispose();//Cierra la ventana 
+       
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     /**
