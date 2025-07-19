@@ -42,6 +42,7 @@ public class IngresoUsuario extends javax.swing.JDialog {
     
     public IngresoUsuario(java.awt.Frame parent, boolean modal, Cliente cliente, int indice) {
         super(parent, modal);
+        initComponents();
         setLocationRelativeTo(null); // Centrar ventana
 
         //Cargar valores para modo edición
@@ -393,16 +394,65 @@ public class IngresoUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
- //Obtener datos de entrada
-    String nombre = txtNombre.getText();
-    int edad = Integer.parseInt(txtEdad.getText());
+ // Obtener y limpiar los valores ingresados por el usuario
+    String nombre = txtNombre.getText().trim();
+    String edadTexto = txtEdad.getText().trim();
 
+    // Verificar si se ha seleccionado género, discapacidad, bebé y tipo de trámite
+    boolean generoSeleccionado = jrbHombre.isSelected() || jrbMujer.isSelected();
+    boolean discapacidadSeleccionada = cbxDiscapacidad.getSelectedIndex() != 0;
+    boolean bebeSeleccionado = cbxBebe.getSelectedIndex() != 0;
+    boolean tramiteSeleccionado = jrbMultiplesTramites.isSelected() || 
+                                   jrbPlataforma.isSelected() || 
+                                   jrbOtroCaso.isSelected();
+
+    // Validar que todos los campos estén completos
+    if (nombre.isEmpty() || 
+        edadTexto.isEmpty() || 
+        !generoSeleccionado || 
+        !discapacidadSeleccionada || 
+        !bebeSeleccionado || 
+        !tramiteSeleccionado) {
+        
+        JOptionPane.showMessageDialog(this, 
+            "Por favor complete todos los campos.", 
+            "Estimado Cliente", 
+            JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Validar que la edad sea un número entero válido entre 13 y 120
+    int edad;
+    try {
+        edad = Integer.parseInt(edadTexto);
+        if (edad < 13 || edad > 120) {
+            JOptionPane.showMessageDialog(this, 
+                "La edad no es válida.", 
+                "Estimado Cliente", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, 
+            "Su edad debe ser un número entero.", 
+            "Estimado Cliente", 
+            JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Obtener el género seleccionado ('M' para hombre, 'F' para mujer)
     char genero = jrbHombre.isSelected() ? 'M' : 'F';
+
+    // Convertir las opciones de discapacidad y bebé a valores booleanos
     boolean discapacidad = cbxDiscapacidad.getSelectedItem().equals("Sí");
     boolean bebe = cbxBebe.getSelectedItem().equals("Sí");
+
+    // Verificar si se marcó "Otro caso"
     boolean otroCaso = jrbOtroCaso.isSelected();
 
-    //Determinar tipo de trámite
+    // Determinar el tipo de trámite:
+    // 'D' para múltiples trámites, 'E' para plataforma, 
+    // 'F' si es mujer y no aplica los anteriores, 'G' si es hombre
     char tramite;
     if (jrbMultiplesTramites.isSelected()) {
         tramite = 'D';
@@ -412,37 +462,25 @@ public class IngresoUsuario extends javax.swing.JDialog {
         tramite = (genero == 'F') ? 'F' : 'G';
     }
 
-    // Calcular tolerancia según género
+    // Definir la tolerancia según el género (8 para mujer, 6 para hombre)
     int tolerancia = (genero == 'F') ? 8 : 6;
 
-    // Modo edición de cliente existente
+    // Crear un nuevo objeto Cliente con los datos recolectados
+    Cliente nuevo = new Cliente(nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso);
+
+    // Si se está editando un cliente existente
     if (esEdicion) {
-        Cliente clienteEditado = new Cliente(
-            nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso
-        );
+        Banco.getInstancia().reemplazarCliente(indiceEdicion, nuevo);
+        JOptionPane.showMessageDialog(this, 
+            "Cliente editado con éxito. Nuevo código: " + nuevo.getCodigo());
+        this.dispose(); // cerrar ventana actual
+    } else {
+        // Si es un cliente nuevo, agregarlo al banco
+        Banco.getInstancia().agregarCliente(nuevo);
+        JOptionPane.showMessageDialog(this, 
+            "Cliente agregado con éxito. Código: " + nuevo.getCodigo());
 
-        Banco.getInstancia().reemplazarCliente(indiceEdicion, clienteEditado);
-
-        JOptionPane.showMessageDialog(
-        this, "Cliente editado con éxito. Nuevo código: " + clienteEditado.getCodigo()
-        );
-
-        this.dispose(); // Cierra ventana
-    }
-
-    //Modo registro de cliente nuevo
-    else {
-        Cliente nuevoCliente = new Cliente(
-            nombre, genero, discapacidad, bebe, tramite, tolerancia, edad, otroCaso
-        );
-
-       Banco.getInstancia().agregarCliente(nuevoCliente);
-
-       JOptionPane.showMessageDialog(
-            this, "Cliente agregado con éxito. Código: " + nuevoCliente.getCodigo()
-        );
-
-        //Limpiar campos para registrar otro cliente
+        // Limpiar los campos del formulario para un nuevo registro
         txtNombre.setText("");
         txtEdad.setText("");
         GeneroCliente.clearSelection();
@@ -450,18 +488,17 @@ public class IngresoUsuario extends javax.swing.JDialog {
         cbxDiscapacidad.setSelectedIndex(0);
         cbxBebe.setSelectedIndex(0);
 
-        //Mostrar resumen
+        // Mostrar ventana de resumen y cerrar esta ventana
         ResumenCliente resumen = new ResumenCliente();
-        this.dispose();
+        this.dispose(); // cerrar formulario actual
         resumen.setVisible(true);
 
-        //Cerrar ventana padre si es del tipo CrudCliente
+        // Si esta ventana fue abierta desde CrudCliente, cerrarla también
         Window parent = SwingUtilities.getWindowAncestor(this);
         if (parent != null && parent instanceof CrudCliente) {
-         parent.setVisible(false);
+            parent.setVisible(false);
         }
     }
-      
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

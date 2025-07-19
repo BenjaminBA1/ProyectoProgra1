@@ -19,6 +19,7 @@ public class ReporteFrame extends javax.swing.JFrame {
     }
     
     public ReporteFrame(String texto) {
+        initComponents();
         setLocationRelativeTo(null);//centra la ventana
         txtReporte.setText(texto); // Mostrar texto en el área
         txtReporte.setCaretPosition(0); // Ir al principio del texto
