@@ -6,6 +6,7 @@ package InterfazGUI;
 
 import Modelo.Banco;
 import Modelo.Cliente;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
@@ -121,15 +122,35 @@ public class CrudCliente extends javax.swing.JFrame {
 
         btnAgregarC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAgregarC.setText("Agregar Cliente");
+        btnAgregarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCActionPerformed(evt);
+            }
+        });
 
         btnActualizarC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizarC.setText("Actualizar Cliente");
+        btnActualizarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarCActionPerformed(evt);
+            }
+        });
 
         btnEliminarC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEliminarC.setText("Eliminar Cliente");
+        btnEliminarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCActionPerformed(evt);
+            }
+        });
 
         btnSalirC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSalirC.setText("Salir");
+        btnSalirC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirCActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Filtrado por Nombre:");
@@ -193,6 +214,52 @@ public class CrudCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCActionPerformed
+        this.dispose(); // cerrar la ventana actual
+    }//GEN-LAST:event_btnSalirCActionPerformed
+
+    private void btnAgregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCActionPerformed
+        IngresoUsuario ingreso = new IngresoUsuario(this, true);// abrir formulario para agregar nuevo cliente
+        ingreso.setVisible(true);
+        actualizarTabla();
+    }//GEN-LAST:event_btnAgregarCActionPerformed
+
+    private void btnActualizarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCActionPerformed
+        int fila = jTable1.getSelectedRow(); // obtener la fila seleccionada de la tabla
+
+    if (fila >= 0) {// obtener el cliente desde la lista usando la fila seleccionada
+        Cliente cliente = Banco.getInstancia().getClientes().get(fila);
+        IngresoUsuario editar = new IngresoUsuario(this, true, cliente, fila);// abrir formulario en edicion con el cliente seleccionado
+        editar.setVisible(true);
+        actualizarTabla();
+    } else {// mostrar advertencia si no se selecciono ningun cliente
+        JOptionPane.showMessageDialog(this, "Seleccione un cliente para editar", "Aviso", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_btnActualizarCActionPerformed
+
+    private void btnEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCActionPerformed
+        int fila = jTable1.getSelectedRow();// obtener la fila seleccionada de la tabla
+
+    if (fila >= 0) {
+        // Confirmar antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(// confirmar eliminacion con el usuario
+            this,
+            "¿Estás segura de que deseas eliminar este cliente?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            Banco.getInstancia().eliminarCliente(fila);// eliminar el cliente de la lista
+            actualizarTabla();
+            JOptionPane.showMessageDialog(this, "Cliente eliminado correctamente.");// mostrar mensaje de confirmacion
+        }
+
+    } else {// mostrar advertencia si no se selecciono ningun cliente
+        JOptionPane.showMessageDialog(this, "Seleccione un cliente para eliminar", "Aviso", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_btnEliminarCActionPerformed
 
     /**
      * @param args the command line arguments
